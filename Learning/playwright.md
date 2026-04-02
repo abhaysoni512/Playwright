@@ -73,3 +73,147 @@ By default tests run headless in parallel across Chromium, Firefox and WebKit (c
 ```bash
 npx playwright test
 ```
+
+
+## Running playwright using terminal
+
+1. to select only one project, use the `--project` flag:
+
+```bash
+npx playwright test --project=chromium
+```
+2. to run a specific test file, use the `--test` flag:
+
+```bash
+npx playwright test --test=tests/example.spec.ts
+```
+
+3. to run a specific test, use the `--grep` flag:
+
+```bash 
+npx playwright test --grep="should have the correct title"
+```
+
+4. to run tests in headed mode, use the `--headed` flag:
+
+```bash
+npx playwright test --headed
+```
+
+# test Annotation & Grouping
+
+1. to group tests, use the `test.describe` function:
+
+```typescript
+test.describe('My test suite', () => {
+  test('test 1', async ({ page }) => {
+    // test code
+  });
+  test('test 2', async ({ page }) => {
+    // test code
+  });
+});
+```
+
+2. test.only: to run only a specific test or group of tests, use the `test.only` function:
+
+```typescript
+test.only('should run only this test', async ({ page }) => {
+  // test code
+});
+```
+
+```test.describe.only('should run only this group of tests', () => {
+  test('test 1', async ({ page }) => {
+    // test code
+  });
+  test('test 2', async ({ page }) => {
+    // test code
+  });
+});
+```
+
+3. test.skip: to skip a specific test or group of tests, use the `test.skip` function:
+
+```typescript
+test.skip('should skip this test', async ({ page }) => {
+  // test code
+});
+```
+
+other ways to skip tests include:
+
+```typescript
+test.('should skip this test', async ({ page }) => {
+  test.skip(true, 'skipping this test');
+  // test code
+  ///
+});
+```
+skip condition can be based on environment variables, browser type, or any other condition:
+
+```typescript
+test('should skip this test for chromium', async ({ page }) => {
+  test.skip(page.browserName === 'chromium', 'skipping this test for chromium');  
+  // test code
+});
+
+// if we want to skip all the tests in a test file, we can use the `test.skip` function at the top of the file:
+
+```typescript
+test.skip(true, 'skipping all tests in this file');
+```
+
+4. test.fixme: to mark a test as a known issue that needs to be fixed, use the `test.fixme` function:
+
+```typescript
+test.fixme('should fix this test', async ({ page }) => {
+  // test code
+});
+```
+
+5. test.slow: to mark a test as slow, use the `test.slow` function, which will increase the timeout for that test(3x by default):
+
+```typescript
+Inside a function:
+test('should mark this test as slow', async ({ page }) => {
+  test.slow(true, 'marking this test as slow');
+  // test code
+});
+```
+
+6. test.setTimeout: to set a custom timeout for a specific test, use the `test.setTimeout` function:
+
+```typescript
+test('should set a custom timeout', async ({ page }) => {
+  test.setTimeout(10000); // set timeout to 10 seconds
+  // test code
+});
+```
+
+# Hook functions in Playwright
+
+Hook functions are used to set up and tear down test environments, . Playwright provides several hook functions that can be used to perform actions before and after tests, as well as before and after each test.
+
+1. `beforeEach`: This hook runs before each test in a test suite. It is typically used to set up the test environment, such as launching a browser or navigating to a specific page.
+
+Syntax:
+
+1st way to use beforeEach hook function:
+```typescript
+test.beforeEach(hookFunction);
+```
+2nd way to use beforeEach hook function:
+```typescript
+test.beforeEach(title, hookFunction);
+```
+
+
+
+
+2. `beforeAll`: This hook runs once before all tests in a test suite. It is typically used to set up resources that are shared across multiple tests, such as a database connection or a web server.
+
+Syntax:
+```typescript
+test
+
