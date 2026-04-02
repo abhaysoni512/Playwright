@@ -208,12 +208,25 @@ test.beforeEach(hookFunction);
 test.beforeEach(title, hookFunction);
 ```
 
+2. `afterEach`: This hook runs after each test in a test suite. It is typically used to clean up the test environment, such as closing a browser or clearing cookies.
+Syntax:
+```typescript
+test.afterEach(hookFunction);
+```
+Syntax:
+```typescript
+test.afterEach(title, hookFunction);
+```
 
-
-
-2. `beforeAll`: This hook runs once before all tests in a test suite. It is typically used to set up resources that are shared across multiple tests, such as a database connection or a web server.
+3. `beforeAll`: This hook runs once before all tests in a test suite. It is typically used to set up resources that are shared across multiple tests, such as a database connection or a web server.
 
 Syntax:
 ```typescript
-test
+test.beforeAll(hookFunction);
+```
 
+4. `afterAll`: This hook runs once after all tests in a test suite. It is typically used to clean up resources that were set up in the `beforeAll` hook, such as closing a database connection or shutting down a web server.
+
+Note: it depends on each worker, if you are running tests in parallel, each worker will have its own instance of the `beforeAll` and `afterAll` hooks. This means that if you have multiple workers running tests, the `beforeAll` hook will run once for each worker, and the `afterAll` hook will also run once for each worker. If you want to share resources across workers, you can use a global setup and teardown file instead of the `beforeAll` and `afterAll` hooks.
+
+Note: If multiple hooks of the same type are defined, they will run in the order they were defined. For example, if you have two `beforeEach` hooks, the first one defined will run before the second one. 
