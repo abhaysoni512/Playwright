@@ -4,6 +4,7 @@ test("Practice of fill , press and press sequence", async ({ page }) => {
     // await page.goto("https://ultimateqa.com/filling-out-forms");
     // await page.locator('#et_pb_contact_name_0').fill("Abhay Soni");
     // await page.locator('#et_pb_contact_message_0').fill("This is a practice of fill and press sequence in Playwright");
+    //
 
 
     // practice of press sequence
