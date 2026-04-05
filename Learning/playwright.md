@@ -193,7 +193,7 @@ test('should set a custom timeout', async ({ page }) => {
 
 # Hook functions in Playwright
 
-Hook functions are used to set up and tear down test environments, . Playwright provides several hook functions that can be used to perform actions before and after tests, as well as before and after each test.
+Hook functions are used to set up and tear down test environments . Playwright provides several hook functions that can be used to perform actions before and after tests, as well as before and after each test.
 
 1. `beforeEach`: This hook runs before each test in a test suite. It is typically used to set up the test environment, such as launching a browser or navigating to a specific page.
 
@@ -230,3 +230,27 @@ test.beforeAll(hookFunction);
 Note: it depends on each worker, if you are running tests in parallel, each worker will have its own instance of the `beforeAll` and `afterAll` hooks. This means that if you have multiple workers running tests, the `beforeAll` hook will run once for each worker, and the `afterAll` hook will also run once for each worker. If you want to share resources across workers, you can use a global setup and teardown file instead of the `beforeAll` and `afterAll` hooks.
 
 Note: If multiple hooks of the same type are defined, they will run in the order they were defined. For example, if you have two `beforeEach` hooks, the first one defined will run before the second one. 
+ 
+# Chapter 5 : Page Object Model (POM)
+
+The Page Object Model (POM) is a design pattern that helps to create maintainable and reusable test code by encapsulating the interactions with web pages into separate classes. Each class represents a specific page or component of the web application, and contains methods that perform actions on that page or component.
+
+POM is a design pattern in test automation that creates an object repository for storing all locators. The page object will contain the representation of the page, and the services the page provides via methods. This design pattern helps to reduce code duplication and improve test maintenance by separating the test logic from the page structure.
+
+representation of the page = locators and elements on the page
+services the page provides = methods that perform actions on the page
+
+## Playwright Test fixtures :
+
+Fixtures are a powerful feature in Playwright Test that allow you to set up and tear down test environments, as well as share resources across multiple tests. They are similar to hook functions, but they provide more flexibility and control over the test environment.
+
+### Creating a fixture:
+
+* To create a fixture, you can use the `test.extend` function, which allows you to define a new fixture that can be used in your tests. The `test.extend` function takes an object as an argument, where the keys are the names of the fixtures and the values are functions that set up the fixture.
+* Cutom created fixtures can be used with POM and over before/after hooks. They can be used to set up and tear down test environments, as well as share resources across multiple tests. For example, you can create a fixture that sets up a database connection before each test and tears it down after each test, or a fixture that creates a new user account before each test and deletes it after each test.
+
+### Types of fixtures:
+1. `Test Fixtures`: Test Fixture gets requested once per test. It is used to set up and tear down test environments, such as launching a browser or navigating to a specific page before each test, and closing the browser or clearing cookies after each test.
+
+2. `Worker Fixtures`: Worker Fixture gets requested once per worker. It is used to set up and tear down resources that are shared across multiple tests, such as a database connection or a web server before all tests in a worker, and closing the database connection or shutting down the web server after all tests in a worker.
+
