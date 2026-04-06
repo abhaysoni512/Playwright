@@ -24,12 +24,14 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: 'html',
-   reporter: [['html', { open: 'always' }]],
+  reporter: process.env.CI
+    ? [['html', { open: 'never' }]]
+    : [['html', { open: 'always' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    headless: false,
+    headless: !!process.env.CI, // headless in GitHub Actions, headed locally
     //screenshot: 'only-on-failure',
     //video: 'retain-on-failure',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
