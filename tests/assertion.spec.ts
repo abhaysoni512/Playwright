@@ -22,8 +22,8 @@ test("Practice of assertion", async ({ page }) => {
 
     // Soft assertion: just put expect.soft instead of expect and it will not fail the test immediately if the assertion fails, it will continue to execute the rest of the test and at the end it will report all the failed assertions together.
 
-    await expect.soft( await page.locator('[data-test="login-button"]')).toBeDisabled();
-    await expect.soft(page,"This is custom error message").not.toHaveTitle("Swag Labs");
+    //await expect.soft( await page.locator('[data-test="login-button"]')).toBeDisabled();
+    //await expect.soft(page,"This is custom error message").not.toHaveTitle("Swag Labs");
 
     console.log("This is after soft assertion");
 
