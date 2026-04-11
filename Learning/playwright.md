@@ -254,3 +254,9 @@ Fixtures are a powerful feature in Playwright Test that allow you to set up and 
 
 2. `Worker Fixtures`: Worker Fixture gets requested once per worker. It is used to set up and tear down resources that are shared across multiple tests, such as a database connection or a web server before all tests in a worker, and closing the database connection or shutting down the web server after all tests in a worker.
 
+# Chapter 6 : Introduction to Playwright with API testing
+
+* Most common API testing
+
+- Most common APIs are REST APIs, which use HTTP methods (GET, POST, PUT, DELETE) to perform operations on resources. REST APIs typically return data in JSON format, and can be tested using tools like Postman or by writing test scripts in programming languages like JavaScript or Python.
+
